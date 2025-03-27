@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestión de Artículos</title>
+    <link rel="stylesheet" href="/css/listar.css" />
+  </head>
+  <body class="lista-articulos">
+    <!-- Navbar -->
+    <header>
+      <nav>
+        <h1>La Casa de Electricidad</h1>
+        <div class="nav-buttons">
+          <a th:href="@{/fabrica/registrar}" class="btn">Registrar Fábrica</a>
+          <a th:href="@{/articulo/registrar}" class="btn">Registrar Artículo</a>
+          <a th:href="@{/fabrica/listar}" class="btn">Listar Fábricas</a>
+          <a
+            th:href="@{/articulo/listar}"
+            class="btn"
+            style="background-color: #2980b9"
+            >Listar Artículos</a
+          >
+          <a th:href="@{/logout}" class="btn logout">Cerrar Sesión</a>
+
+          <div class="user-info">
+            <div class="user-avatar">U</div>
+            <span
+              th:if="${session != null and session.usuariosession != null}"
+              th:text="${session.usuariosession.nombre}"
+              >Usuario</span
+            >
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="main-lista-articulos">
+      <section class="form-container">
+        <h2>Gestión de Artículos</h2>
+
+        <!-- Mensajes de éxito o error -->
+        <div class="alert alert-success" id="exito" style="display: none">
+          ¡Operación exitosa!
+        </div>
+        <div class="alert alert-danger" id="error" style="display: none">
+          ¡Hubo un error!
+        </div>
+
+        <a href="/articulo/registrar" class="btn">Nuevo Artículo</a>
+
+        <!-- Tabla para mostrar los artículos -->
+        <table class="table lista-articulos-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Descripción</th>
+              <th>Fábrica</th>
+              <th>Imagen</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody th:each="articulo : ${articulos}">
+            <tr>
+              <td th:text="${articulo.nroArticulo}">1</td>
+              <td th:text="${articulo.nombreArticulo}">Artículo ABC</td>
+              <td th:text="${articulo.descripcionArticulo}">
+                Descripción del artículo ABC
+              </td>
+              <td th:text="${articulo.fabrica.nombreFabrica}">Fábrica XYZ</td>
+              <td class="text-center">
+                <div class="article-image-container">
+                  <img
+                    class="article-profile-image"
+                    th:src="@{/imagen/perfil/__${articulo.idArticulo}__}"
+                    alt="Img perfil"
+                  />
+                </div>
+              </td>
+              <td>
+                <a
+                  th:href="@{/articulo/modificar/__${articulo.idArticulo}__}"
+                  class="btn btn-edit"
+                >
+                  <i class="fas fa-edit"></i> Modificar
+                </a>
+                <form action="#" method="POST" style="display: inline">
+                  <button
+                    type="submit"
+                    class="btn btn-delete"
+                    onclick="return confirm('¿Estás seguro?')"
+                  >
+                    <i class="fas fa-trash-alt"></i> Eliminar
+                  </button>
+                </form>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 La Casa de Electricidad. Todos los derechos reservados.</p>
+    </footer>
+  </body>
+</html>

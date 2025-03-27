@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inicio</title>
+    <link rel="stylesheet" href="/css/inicio.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <h1>La Casa de Electricidad</h1>
+        <div class="nav-buttons">
+          <a th:href="@{/fabrica/listar}" class="btn">Listar Fábricas</a>
+          <a th:href="@{/articulo/listar}" class="btn">Listar Artículos</a>
+          <a th:href="@{/logout}" class="btn logout">Cerrar Sesión</a>
+
+          <div class="user-info">
+            <div class="user-avatar">U</div>
+            <span
+              th:if="${session != null and session.usuariosession != null}"
+              th:text="${session.usuariosession.nombre}"
+              >Usuario</span
+            >
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="hero">
+      <h2>Soluciones Eléctricas de Calidad</h2>
+      <p>
+        Accede a la mejor selección de productos eléctricos y gestiona tus
+        compras de manera eficiente.
+      </p>
+    </div>
+    <main>
+      <section class="features">
+        <h2>¿Por qué elegir La Casa de Electricidad?</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">💡</div>
+            <h3>Amplio Catálogo</h3>
+            <p>
+              Ofrecemos una gran variedad de artículos eléctricos para todas tus
+              necesidades, desde componentes básicos hasta equipos
+              especializados.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🏭</div>
+            <h3>Fabricantes Confiables</h3>
+            <p>
+              Trabajamos con las mejores fábricas del sector para garantizar
+              productos de la más alta calidad y durabilidad.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🛠️</div>
+            <h3>Gestión Eficiente</h3>
+            <p>
+              Nuestro sistema te permite gestionar fácilmente tus pedidos,
+              inventario y proveedores desde cualquier dispositivo.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2025 La Casa de Electricidad. Todos los derechos reservados.</p>
+    </footer>
+    <script src="/js/inicio.js"></script>
+  </body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inicio</title>
+    <link rel="stylesheet" href="/css/inicio.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <h1>La Casa de Electricidad</h1>
+        <div class="nav-buttons">
+          <a href="productos.html" class="btn">Productos</a>
+          <a href="servicios.html" class="btn">Servicios</a>
+          <a href="contacto.html" class="btn">Contacto</a>
+          <a th:href="@{/login}" class="btn login">Iniciar Sesión</a>
+          <a th:href="@{/usuario/registrar}" class="btn register"
+            >Registrarse</a
+          >
+        </div>
+      </nav>
+    </header>
+    <div class="hero">
+      <h2>Soluciones Eléctricas de Calidad</h2>
+      <p>
+        Accede a la mejor selección de productos eléctricos y gestiona tus
+        compras de manera eficiente.
+      </p>
+      <a th:href="@{/login}" class="btn login">Acceder al Sistema</a>
+    </div>
+    <main>
+      <section class="features">
+        <h2>¿Por qué elegir La Casa de Electricidad?</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">💡</div>
+            <h3>Amplio Catálogo</h3>
+            <p>
+              Ofrecemos una gran variedad de artículos eléctricos para todas tus
+              necesidades, desde componentes básicos hasta equipos
+              especializados.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🏭</div>
+            <h3>Fabricantes Confiables</h3>
+            <p>
+              Trabajamos con las mejores fábricas del sector para garantizar
+              productos de la más alta calidad y durabilidad.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🛠️</div>
+            <h3>Gestión Eficiente</h3>
+            <p>
+              Nuestro sistema te permite gestionar fácilmente tus pedidos,
+              inventario y proveedores desde cualquier dispositivo.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="cta">
+        <h2>¿Listo para empezar?</h2>
+        <p>
+          Únete a nuestro sistema de gestión y optimiza tu experiencia con
+          productos eléctricos.
+        </p>
+        <a th:href="@{/registro}" class="btn">Crear una cuenta</a>
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2025 La Casa de Electricidad. Todos los derechos reservados.</p>
+    </footer>
+    <script src="/js/inicio.js"></script>
+  </body>
+</html>

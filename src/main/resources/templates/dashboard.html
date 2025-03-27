@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/index.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <h1>La Casa de Electricidad</h1>
+        <div class="nav-buttons">
+          <a th:href="@{/fabrica/registrar}" class="btn">Registrar Fábrica</a>
+          <a th:href="@{/articulo/registrar}" class="btn">Registrar Artículo</a>
+          <a th:href="@{/fabrica/listar}" class="btn">Listar Fábricas</a>
+          <a th:href="@{/articulo/listar}" class="btn">Listar Artículos</a>
+          <a th:href="@{/logout}" class="btn logout">Cerrar Sesión</a>
+
+          <div class="user-info">
+            <div class="user-avatar">U</div>
+            <span
+              th:if="${session != null and session.usuariosession != null}"
+              th:text="${session.usuariosession.nombre}"
+              >Usuario</span
+            >
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <section class="welcome">
+        <h2>
+          Bienvenido a tu Panel de Control,
+          <span
+            th:if="${session != null and session.usuariosession != null}"
+            th:text="${session.usuariosession.nombre}"
+            >Usuario</span
+          >
+        </h2>
+        <p>Gestiona fábricas y artículos eléctricos desde un solo lugar.</p>
+      </section>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <h3>Total Fábricas</h3>
+          <div class="number">24</div>
+          <div class="trend">↑ 12% este mes</div>
+        </div>
+        <div class="stat-card">
+          <h3>Total Artículos</h3>
+          <div class="number">156</div>
+          <div class="trend">↑ 8% este mes</div>
+        </div>
+        <div class="stat-card">
+          <h3>Pedidos Activos</h3>
+          <div class="number">12</div>
+          <div class="trend negative">↓ 3% este mes</div>
+        </div>
+        <div class="stat-card">
+          <h3>Stock Disponible</h3>
+          <div class="number">1,245</div>
+          <div class="trend">↑ 5% este mes</div>
+        </div>
+      </div>
+      <div class="dashboard">
+        <div class="dashboard-card card-factory">
+          <h3>Gestión de Fábricas</h3>
+          <p>
+            Registra nuevas fábricas, visualiza y actualiza la información de
+            las existentes.
+          </p>
+
+          <div class="quick-actions">
+            <a th:href="@{/fabrica/registrar}" class="quick-action-btn">
+              <span>➕</span>
+              Nueva Fábrica
+            </a>
+            <a th:href="@{/fabrica/listar}" class="quick-action-btn">
+              <span>📋</span>
+              Ver Todas
+            </a>
+            <a th:href="@{/fabrica/buscar}" class="quick-action-btn">
+              <span>🔍</span>
+              Buscar
+            </a>
+          </div>
+
+          <h4 style="margin-top: 1.5rem; margin-bottom: 0.5rem">
+            Fábricas Recientes
+          </h4>
+          <div class="recent-list">
+            <div class="recent-item" th:each="fabrica : ${fabricasRecientes}">
+              <div class="recent-item-icon">🏭</div>
+              <div class="recent-item-content">
+                <div class="recent-item-title" th:text="${fabrica.nombre}">
+                  Fábrica ABC
+                </div>
+                <div class="recent-item-info" th:text="${fabrica.ubicacion}">
+                  Madrid, España
+                </div>
+              </div>
+              <a
+                th:href="@{/fabrica/detalle/{id}(id=${fabrica.id})}"
+                class="recent-item-action"
+                >Ver</a
+              >
+            </div>
+            <!-- Ejemplos estáticos para visualización -->
+            <div class="recent-item">
+              <div class="recent-item-icon">🏭</div>
+              <div class="recent-item-content">
+                <div class="recent-item-title">ElectroVolt S.A.</div>
+                <div class="recent-item-info">Barcelona, España</div>
+              </div>
+              <a href="#" class="recent-item-action">Ver</a>
+            </div>
+            <div class="recent-item">
+              <div class="recent-item-icon">🏭</div>
+              <div class="recent-item-content">
+                <div class="recent-item-title">LumTech Industries</div>
+                <div class="recent-item-info">Valencia, España</div>
+              </div>
+              <a href="#" class="recent-item-action">Ver</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-card card-product">
+          <h3>Gestión de Artículos</h3>
+          <p>
+            Administra tu inventario de productos eléctricos, añade nuevos
+            artículos y mantén actualizado el catálogo.
+          </p>
+
+          <div class="quick-actions">
+            <a th:href="@{/articulo/registrar}" class="quick-action-btn">
+              <span>➕</span>
+              Nuevo Artículo
+            </a>
+            <a th:href="@{/articulo/listar}" class="quick-action-btn">
+              <span>📋</span>
+              Ver Todos
+            </a>
+            <a th:href="@{/articulo/buscar}" class="quick-action-btn">
+              <span>🔍</span>
+              Buscar
+            </a>
+          </div>
+
+          <h4 style="margin-top: 1.5rem; margin-bottom: 0.5rem">
+            Artículos Recientes
+          </h4>
+          <div class="recent-list">
+            <div class="recent-item" th:each="articulo : ${articulosRecientes}">
+              <div class="recent-item-icon">💡</div>
+              <div class="recent-item-content">
+                <div class="recent-item-title" th:text="${articulo.nombre}">
+                  Lámpara LED 20W
+                </div>
+                <div class="recent-item-info">
+                  Stock: <span th:text="${articulo.stock}">45</span> | Precio:
+                  <span th:text="${articulo.precio}">19.99€</span>
+                </div>
+              </div>
+              <a
+                th:href="@{/articulo/detalle/{id}(id=${articulo.id})}"
+                class="recent-item-action"
+                >Ver</a
+              >
+            </div>
+            <!-- Ejemplos estáticos para visualización -->
+            <div class="recent-item">
+              <div class="recent-item-icon">💡</div>
+              <div class="recent-item-content">
+                <div class="recent-item-title">Cable Trifásico 10m</div>
+                <div class="recent-item-info">Stock: 32 | Precio: 25.50€</div>
+              </div>
+              <a href="#" class="recent-item-action">Ver</a>
+            </div>
+            <div class="recent-item">
+              <div class="recent-item-icon">💡</div>
+              <div class="recent-item-content">
+                <div class="recent-item-title">
+                  Interruptor Diferencial 30mA
+                </div>
+                <div class="recent-item-info">Stock: 18 | Precio: 42.75€</div>
+              </div>
+              <a href="#" class="recent-item-action">Ver</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <p>&copy; 2025 La Casa de Electricidad. Todos los derechos reservados.</p>
+    </footer>
+  </body>
+</html>

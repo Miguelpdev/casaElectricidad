@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registrar Fábrica</title>
+    <link rel="stylesheet" href="/css/art_registro.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <h1>La Casa de Electricidad</h1>
+        <div class="nav-buttons">
+          <a
+            th:href="@{/fabrica/registrar}"
+            class="btn"
+            style="background-color: #2980b9"
+            >Registrar Fábrica</a
+          >
+          <a th:href="@{/articulo/registrar}" class="btn">Registrar Artículo</a>
+          <a th:href="@{/fabrica/listar}" class="btn">Listar Fábricas</a>
+          <a th:href="@{/articulo/listar}" class="btn">Listar Artículos</a>
+          <a th:href="@{/logout}" class="btn logout">Cerrar Sesión</a>
+
+          <div class="user-info">
+            <div class="user-avatar">U</div>
+            <span
+              th:if="${session != null and session.usuariosession != null}"
+              th:text="${session.usuariosession.nombre}"
+              >Usuario</span
+            >
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="container mt-5">
+      <div class="card">
+        <div class="card-header">
+          <h3>Editar Fábrica</h3>
+        </div>
+        <div class="card-body">
+          <form
+            th:action="@{/fabrica/modificar/__${fabrica.idFabrica}__}"
+            method="POST"
+          >
+            <div class="form-group">
+              <label for="nombreFabrica" class="required-field"
+                >Nombre de la Fábrica:</label
+              >
+              <input
+                type="text"
+                id="nombreFabrica"
+                name="nombreFabrica"
+                class="form-control"
+                th:value="${fabrica.nombreFabrica}"
+                placeholder="Ingrese el nombre de la Fabrica"
+                required
+              />
+            </div>
+            <div class="form-footer">
+              <button
+                type="button"
+                onclick="window.history.back();"
+                class="btnes btn-outline"
+              >
+                <span class="icon">←</span>Cancelar
+              </button>
+              <button type="submit" class="btnes btn-success">
+                <span class="icon">✓</span>Registrar Artículo
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

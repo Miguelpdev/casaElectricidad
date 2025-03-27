@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registrar Artículo</title>
+    <link rel="stylesheet" href="/css/art_registro.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <h1>La Casa de Electricidad</h1>
+        <div class="nav-buttons">
+          <a th:href="@{/fabrica/registrar}" class="btn">Registrar Fábrica</a>
+          <a
+            th:href="@{/articulo/registrar}"
+            class="btn"
+            style="background-color: #2980b9"
+            >Registrar Artículo</a
+          >
+          <a th:href="@{/fabrica/listar}" class="btn">Listar Fábricas</a>
+          <a th:href="@{/articulo/listar}" class="btn">Listar Artículos</a>
+          <a th:href="@{/logout}" class="btn logout">Cerrar Sesión</a>
+
+          <div class="user-info">
+            <div class="user-avatar">U</div>
+            <span
+              th:if="${session != null and session.usuariosession != null}"
+              th:text="${session.usuariosession.nombre}"
+              >Usuario</span
+            >
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+      <div class="card">
+        <div class="card-header">
+          <h2>Registro de Nuevo Artículo</h2>
+          <p>
+            Complete el formulario para añadir un nuevo producto al inventario
+          </p>
+        </div>
+        <div class="card-body">
+          <form
+            action="/articulo/registro"
+            method="POST"
+            enctype="multipart/form-data"
+          >
+            <div class="form-group">
+              <label for="nombreArticulo" class="required-field"
+                >Nombre del Artículo</label
+              >
+              <input
+                type="text"
+                id="nombreArticulo"
+                name="nombreArticulo"
+                class="form-control"
+                placeholder="Ingrese el nombre del artículo"
+                required
+              />
+            </div>
+
+            <div class="form-group my-3">
+              <input type="file" class="form-control" name="archivo" />
+            </div>
+
+            <div class="form-group">
+              <label for="descripcionArticulo" class="required-field"
+                >Descripción del Artículo</label
+              >
+              <textarea
+                id="descripcionArticulo"
+                name="descripcionArticulo"
+                class="form-control"
+                placeholder="Proporcione una descripción detallada del artículo"
+                required
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="fabrica" class="required-field"
+                >Seleccionar Fábrica</label
+              >
+              <select id="fabrica" name="fabrica" class="form-control" required>
+                <option value="">Seleccionar Fábrica</option>
+                <option
+                  th:each="fabrica : ${fabricas}"
+                  th:value="${fabrica.idFabrica}"
+                  th:text="${fabrica.nombreFabrica}"
+                ></option>
+              </select>
+            </div>
+
+            <div class="form-footer">
+              <button
+                type="button"
+                onclick="window.history.back();"
+                class="btnes btn-outline"
+              >
+                <span class="icon">←</span>Cancelar
+              </button>
+              <button type="submit" class="btnes btn-success">
+                <span class="icon">✓</span>Registrar Artículo
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

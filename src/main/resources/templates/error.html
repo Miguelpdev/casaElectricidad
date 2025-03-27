@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Error Page - La Casa de Electricidad</title>
+    <!-- Font Awesome para iconos -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- Google Fonts -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background-color: #f8f9fa;
+        color: #333;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .error-container {
+        text-align: center;
+        padding: 3rem;
+        background-color: white;
+        border-radius: 1rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        position: relative;
+        z-index: 10;
+        max-width: 600px;
+        width: 90%;
+      }
+
+      .error-icon {
+        font-size: 5rem;
+        margin-bottom: 1.5rem;
+        color: #e74c3c;
+        animation: pulse 2s infinite;
+      }
+
+      .error-code {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: #2c3e50;
+      }
+
+      .error-message {
+        font-size: 1.2rem;
+        color: #7f8c8d;
+        margin-bottom: 2rem;
+      }
+
+      .btn-back {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        font-weight: 500;
+      }
+
+      .btn-back:hover {
+        background-color: #2980b9;
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+      }
+
+      .btn-back i {
+        margin-right: 8px;
+      }
+
+      .bg-circle {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(5px);
+      }
+
+      .bg-circle-1 {
+        width: 300px;
+        height: 300px;
+        background-color: rgba(52, 152, 219, 0.1);
+        top: -100px;
+        left: -100px;
+      }
+
+      .bg-circle-2 {
+        width: 200px;
+        height: 200px;
+        background-color: rgba(155, 89, 182, 0.1);
+        bottom: -50px;
+        right: -50px;
+      }
+
+      .bg-circle-3 {
+        width: 150px;
+        height: 150px;
+        background-color: rgba(46, 204, 113, 0.1);
+        bottom: 100px;
+        left: 50px;
+      }
+
+      .bg-circle-4 {
+        width: 250px;
+        height: 250px;
+        background-color: rgba(241, 196, 15, 0.1);
+        top: 100px;
+        right: 50px;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      /* Animación adicional para mejorar la experiencia */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .error-container {
+        animation: fadeIn 0.8s ease-out forwards;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .error-icon {
+          font-size: 4rem;
+        }
+
+        .error-code {
+          font-size: 2.5rem;
+        }
+
+        .error-message {
+          font-size: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Círculos de fondo -->
+    <div class="bg-circle bg-circle-1"></div>
+    <div class="bg-circle bg-circle-2"></div>
+    <div class="bg-circle bg-circle-3"></div>
+    <div class="bg-circle bg-circle-4"></div>
+
+    <div class="error-container">
+      <i class="fas fa-exclamation-triangle error-icon"></i>
+      <h1 class="error-code" th:text="'Error ' + ${codigo}">Error 404</h1>
+      <p class="error-message" th:text="${mensaje}">
+        Lo sentimos, la página que estás buscando no está disponible.
+      </p>
+      <a th:href="@{/inicio}" class="btn-back">
+        <i class="fas fa-home"></i> Volver al inicio
+      </a>
+      <button type="button" class="btn-back" onclick="window.history.back();">
+        ← Atrás
+      </button>
+    </div>
+  </body>
+</html>
